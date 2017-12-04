@@ -66,11 +66,12 @@ def convert_logs(raw_file):
             if (line.split()[0]).isdigit():
                 lines.append(line.split(None, 1))
             else:
-                # To fix irregularity in whitespace numbers
-                # after the month string
-                whitespaces = (line[:5]).count(" ")
                 # Convert %b %d %H:%M:%S to Epoch time
                 d_month, d_day, d_time = line.split()[:3]
+                # To fix irregularity in whitespace numbers
+                # after the month string
+                date_index = line.index(d_day)
+                whitespaces = (line[:date_index]).count(" ")
                 # We need current year to improve Epoch time accuracy
                 d_string = "{} {} {} {}".format(
                     current_year,
