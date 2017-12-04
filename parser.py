@@ -106,8 +106,8 @@ def convert_logs(raw_file):
                     d_month,
                     d_day,
                     d_time)
-                # Pay close attention to white spaces
-                d_logged = "{}  {} {}".format(
+                # Pay close attention to white spaces in d_logged
+                d_logged = "{} {} {}".format(
                     d_month,
                     d_day,
                     d_time)
