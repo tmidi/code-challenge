@@ -54,32 +54,6 @@ def date_convert_to_epoch(date):
         sys.exit(1)
 
 
-# def epoch_to_year(date):
-#     """ convert date to Epoch time.
-#     Convert a given Epoch date to standard year minus an hour.
-#     This to deal with file created between 12/31 and 1/1
-
-#     Args:
-#         date: String represent current EPOCH time format.
-
-#     Returns:
-#         string of current year minus an hour.
-
-#     Raises:
-#         ValueError: invalid literal for int() with base 10
-#     """
-#     try:
-#         int(date)
-#         print 'date: ', date
-#         hour = int(date) - 3600
-#         print hour
-#         strftime_time = time.strftime("%Y", time.localtime(hour))
-#         return strftime_time
-#     except ValueError as e:
-#         print e
-#         sys.exit(1)
-
-
 def convert_logs(raw_file):
     """ Take a file as in put a convert unify all time entrees
 
