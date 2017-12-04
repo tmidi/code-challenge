@@ -35,13 +35,10 @@ current_year = time.strftime("%Y")
 def date_convert_to_epoch(date):
     """ convert date to Epoch time.
     Convert a given date to Unix time (also known as Epoch time)
-
     Args:
         date: String represent date in '%Y %b %d %H:%M:%S' format.
-
     Returns:
         An integer value of the Epoch time.
-
     Raises:
         ValueError: Unknown string format
     """
@@ -55,14 +52,11 @@ def date_convert_to_epoch(date):
 
 
 def convert_logs(raw_file):
-    """ Take a file as in put a convert unify all time entrees
-
+    """ Take a file as in put a convert unify all time entries
     Args:
         raw_file: String represent a file path.
-
     Returns:
         Nested list of time and message of each line.
-
     Raises:
         None
     """
@@ -72,6 +66,9 @@ def convert_logs(raw_file):
             if (line.split()[0]).isdigit():
                 lines.append(line.split(None, 1))
             else:
+                # To fix irregularity in whitespace numbers
+                # after the month string
+                whitespaces = (line[:5]).count(" ")
                 # Convert %b %d %H:%M:%S to Epoch time
                 d_month, d_day, d_time = line.split()[:3]
                 # We need current year to improve Epoch time accuracy
@@ -81,8 +78,9 @@ def convert_logs(raw_file):
                     d_day,
                     d_time)
                 # Pay close attention to white spaces in d_logged
-                d_logged = "{} {} {}".format(
+                d_logged = "{}{}{} {}".format(
                     d_month,
+                    " " * whitespaces,
                     d_day,
                     d_time)
                 log_epoch = date_convert_to_epoch(d_string)
@@ -97,10 +95,8 @@ def parse_logs(logfile):
 
     Args:
         logfile: String represent a file path.
-
     Returns:
         Print health check result and/or exit using according system exit code.
-
     Raises:
         None
     """
